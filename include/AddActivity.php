@@ -16,8 +16,7 @@
     $location_name = $obj['location'];
     $type = $obj['tag'];
     $gender = $obj['gender'];
-    $sql = "Insert into activity(id_host,date_start,title,description,number_people,min_age,max_age,location_name,type,gender) values (1,'".$date_start."','".$title."','".$description."','".$number_people."','".$min_age."','".$max_age."','".$location_name."','".$type."','".$gender."')";
-    $query = mysqli_query($con,$sql);    
+    $sql = "Insert into activity(id_host,date_start,title,description,number_people,min_age,max_age,location_name,type,gender) values (1,'".$date_start."','".$title."','".$description."','".$number_people."','".$min_age."','".$max_age."','".$location_name."','".$type."','".$gender."')";   
     if ($con->query($sql) === TRUE) {
         $result = "New record created successfully";
     } else {

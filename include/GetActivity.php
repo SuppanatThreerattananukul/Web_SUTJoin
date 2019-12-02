@@ -1,7 +1,7 @@
 <?php
     include("ConnectDB.php");
     $result = array();
-    $sql = "select * from activity,user WHERE  activity.id_host = user.id";
+    $sql = "select * from activity,user WHERE  activity.id_host = user.user_id and activity.status != 1";
     $query = mysqli_query($con,$sql);    
     while($row = mysqli_fetch_array($query,MYSQLI_ASSOC))
     {
