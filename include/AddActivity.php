@@ -5,8 +5,7 @@
     
     // decoding the received JSON and store into $obj variable.
     $obj = json_decode($json,true);
-
-    // $id_host = $obj[''];
+    $id_host =  (explode('"',$obj['id_host']));
     $date_start = $obj['datetimes'];
     $title = $obj['title'];
     $description = $obj['description'];
@@ -17,7 +16,7 @@
     $type = $obj['tag'];
     $image = $obj['image'];
     $gender = $obj['gender'];
-    $sql = "Insert into activity(id_host,date_start,title,description,number_people,min_age,max_age,location_name,type,gender,photo) values (1,'".$date_start."','".$title."','".$description."','".$number_people."','".$min_age."','".$max_age."','".$location_name."','".$type."','".$gender."','".$image."')";   
+    $sql = "Insert into activity(id_host,date_start,title,description,number_people,min_age,max_age,location_name,type,gender,photo) values ('".$id_host[1]."','".$date_start."','".$title."','".$description."','".$number_people."','".$min_age."','".$max_age."','".$location_name."','".$type."','".$gender."','".$image."')";   
     if ($con->query($sql) === TRUE) {
         $result = "New record created successfully";
     } else {

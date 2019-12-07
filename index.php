@@ -27,8 +27,8 @@
 </p>
 
 
-    <?php $con = mysqli_connect("localhost","root",""); 
-    mysqli_select_db($con,"sut_join");
+    <?php     include("include/ConnectDB.php");
+
     ?>   
         <table class="table table-striped">
         <thead>
@@ -46,16 +46,16 @@
             $result = mysqli_query($con,$sql_statement); 
         while($row = mysqli_fetch_array($result)) {        ?>
                  <tr>
-                 <td><?php echo$row['id'];?></td>
+                 <td><?php echo$row['user_id'];?></td>
                     <td><?php echo$row['name'];?></td>
                     <td><?php echo$row['email'];?></td>
                     <td><?php echo$row['phone'];?></td>
                     <td><?php echo$row['student_id'];?></td>
-                    <td><a href="index.php?edit=<?php echo $row['id']; ?>" 
+                    <td><a href="index.php?edit=<?php echo $row['user_id']; ?>" 
                         class="btn btn-success" >Edit</a>
-                        <a href="detail.php?detail=<?php echo $row['id']; ?>" 
+                        <a href="detail.php?detail=<?php echo $row['user_id']; ?>" 
                         class="btn btn-primary" >Detail</a>
-                        <a href="process.php?delete=<?php echo $row['id']; ?>" 
+                        <a href="process.php?delete=<?php echo $row['user_id']; ?>" 
                         class="btn btn-danger" >Delete</a></td>
                  </tr>
         <?php }?>
@@ -79,7 +79,7 @@
                 <label>Student ID</label><input type = "text"  name="student_id" value="<?php echo $student_id; ?>" placeholder="">
             </div>
             <div class="form-group">
-            <label>Status</label><select  name="status">
+            <label>Gender</label><select  name="gender">
                     <option value="0">Male</option>
                     <option value="1">Female</option>
                 </select>
