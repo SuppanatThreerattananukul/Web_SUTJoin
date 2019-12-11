@@ -16,7 +16,10 @@
     $type = $obj['tag'];
     $image = $obj['image'];
     $gender = $obj['gender'];
-    $sql = "Insert into activity(id_host,date_start,title,description,number_people,min_age,max_age,location_name,type,gender,photo) values ('".$id_host[1]."','".$date_start."','".$title."','".$description."','".$number_people."','".$min_age."','".$max_age."','".$location_name."','".$type."','".$gender."','".$image."')";   
+    $latitude = $obj['latitude'];
+    $longitude = $obj['longitude'];
+    $address = $obj['address'];
+    $sql = "Insert into activity(id_host,date_start,title,description,number_people,min_age,max_age,location_name,type,gender,photo,location_lat,location_long,location_address) values ('".$id_host[1]."','".$date_start."','".$title."','".$description."','".$number_people."','".$min_age."','".$max_age."','".$location_name."','".$type."','".$gender."','".$image."','".$latitude."','".$longitude."','".$address."')";   
     if ($con->query($sql) === TRUE) {
         $result = "New record created successfully";
     } else {
