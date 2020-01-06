@@ -9,8 +9,14 @@
      // $id_host = $obj[''];
      $id_user = (explode('"',$obj['id_user']));
      $id = $id_user[1];
-    $result = array();
-    $sql = "select * FROM activity,user WHERE id IN (SELECT id_activity from join_activity WHERE id_user = '".$id."')and user_id =$id";
+     $status = $obj['status'];
+     $result = array();
+     if($status == "soon"){
+        $sql = "select * FROM activity,user WHERE id IN (SELECT id_activity from join_activity WHERE id_user = '".$id."')and user_id = activity.id_host  and DATE_FORMAT(date_start, '%Y-%m-%d %H:%i:%s') > DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i:%s')";
+     }
+     else {
+        $sql = "select * FROM activity,user WHERE id IN (SELECT id_activity from join_activity WHERE id_user = '".$id."')and user_id  = activity.id_host and DATE_FORMAT(date_start, '%Y-%m-%d %H:%i:%s') < DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i:%s')";
+     }
     $query = mysqli_query($con,$sql);    
     while($row = mysqli_fetch_array($query,MYSQLI_ASSOC))
     {

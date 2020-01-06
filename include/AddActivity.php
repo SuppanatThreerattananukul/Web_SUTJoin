@@ -13,7 +13,7 @@
     $min_age = $obj['minage'];
     $max_age = $obj['maxage'];
     $location_name = $obj['location'];
-    $type = $obj['tag'];
+    $type = $obj['type'];
     $image = $obj['image'];
     $gender = $obj['gender'];
     $latitude = $obj['latitude'];
