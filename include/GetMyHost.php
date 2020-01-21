@@ -7,10 +7,13 @@
      $obj = json_decode($json,true);
  
      // $id_host = $obj[''];
-     $id_user = (explode('"',$obj['id_user']));
-     $id = $id_user[1];
-    $result = array();
-    $sql = "select * FROM activity,user WHERE id_host =  $id and user_id =$id";
+    //  $id_user = (explode('"',$obj['id_user']));
+     $id = $obj['id_user'];
+     $page = $obj['page'];
+     $perpage = 10;
+     $result = array();
+     $start = ($page - 1) * $perpage;
+    $sql = "select * FROM activity,user WHERE id_host =  $id and user_id =$id ORDER BY date_start DESC limit {$start} , {$perpage}";
     $query = mysqli_query($con,$sql);    
     while($row = mysqli_fetch_array($query,MYSQLI_ASSOC))
     {

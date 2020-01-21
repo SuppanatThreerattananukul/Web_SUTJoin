@@ -14,16 +14,35 @@
     $max_age = $obj['maxage'];
     $location_name = $obj['location'];
     $type = $obj['type'];
+    $tag = $obj['tag'];
     $image = $obj['image'];
     $gender = $obj['gender'];
     $latitude = $obj['latitude'];
     $longitude = $obj['longitude'];
     $address = $obj['address'];
-    $sql = "Insert into activity(id_host,date_start,title,description,number_people,min_age,max_age,location_name,type,gender,photo,location_lat,location_long,location_address) values ('".$id_host[1]."','".$date_start."','".$title."','".$description."','".$number_people."','".$min_age."','".$max_age."','".$location_name."','".$type."','".$gender."','".$image."','".$latitude."','".$longitude."','".$address."')";   
+    $volunteer = $obj['volunteer'];
+    $random = rand(1000,9999);
+    $sql = "Insert into activity(id_host,date_start,title,description,number_people,min_age,max_age,location_name,type,gender,photo,location_lat,location_long,location_address,tag,date_host,date_update,ramdom_code,volunteer_hour) values ('".$id_host[1]."','".$date_start."','".$title."','".$description."','".$number_people."','".$min_age."','".$max_age."','".$location_name."','".$type."','".$gender."','".$image."','".$latitude."','".$longitude."','".$address."','".$tag."',CURDATE(),CURDATE(),'".$random."','".$volunteer."')";   
     if ($con->query($sql) === TRUE) {
-        $result = "New record created successfully";
+        $result = "Your activity create successfully";
     } else {
-        $result = "Error: " . $sql . "<br>" . $query . "<br>" .$conn->error;
+        $result = "Error";
+    }
+    $query = mysqli_query($con,"SELECT * FROM tag where activity_tag ='".$tag."'");
+    $num_rows = mysqli_num_rows($query);
+    if($num_rows > 0){
+        while($row = mysqli_fetch_array($query,MYSQLI_ASSOC))
+    {
+        $amount = $row['amount'] + 1;
+    }
+        $sql1 = "update tag set amount = '".$amount."' where activity_tag ='".$tag."'";
+    }else{
+        $sql1 = "insert into tag(activity_tag,amount) values ('".$tag."',0)";
+    }
+    if ($con->query($sql1) === TRUE) {
+        $result = "Your activity create successfully";
+    } else {
+        $result = "Error";
     }
     header('Content-type: application/json');
     header("content-type:text/javascript;charset=utf-8");	

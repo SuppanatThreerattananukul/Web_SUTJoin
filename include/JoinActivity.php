@@ -34,7 +34,16 @@
 
     if($status == "update"){
         $sql1 = "Update activity Set status = 1 Where id =".$id ;  
-        if  ($con->query($sql1) === TRUE) {
+        // $sql2 = "SELECT user.volunteer,activity.volunteer_hour FROM activity,user WHERE activity.id in (select id_activity from join_activity where id_join = $id) and user.user_id in (select id_user from join_activity where id_join = $id)";
+        // $query = mysqli_query($con,$sql2);    
+        // while($row = mysqli_fetch_array($query,MYSQLI_ASSOC))
+        // {
+        //     $user_hour = $row['volunteer'];
+        //     $activity_hour = $row['volunteer_hour'];
+        // }
+        // $sum_hour = $user_hour+ $activity_hour ;
+        // $sql3 = "update user set volunteer = $sum_hour where user_id in (select id_user from join_activity where id_join = $id)"
+        if  ($con->query($sql1) === TRUE ) {
             $result = "Update record successfully";
         } else {
             $result = "Error: "  .$con->error;
