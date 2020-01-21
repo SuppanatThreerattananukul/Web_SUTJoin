@@ -9,48 +9,48 @@
     // $id_host = $obj[''];
     $Username = $obj['username'];
     $Password = $obj['password'];
-    $responseuser = 0;
+    $responseuser = array();
 
 
-    $sql="SELECT * FROM User Where Username='".$Username."' and Password='".$Password."' ";
+    $sql="SELECT user_status,user_id,Username,Password FROM User Where Username='".$Username."' and Password='".$Password."' ";
  
                   $result1 = mysqli_query($con,$sql);
 				
                   if(mysqli_num_rows($result1)==1){
  
-                      $row = mysqli_fetch_array($result1);
+                      $row = mysqli_fetch_array($result1,MYSQLI_ASSOC);
  
                     //   $_SESSION["UserID"] = $row["user_id"];
                     //   $_SESSION["Username"] = $row["username"];
-                      $_SESSION["user_status"] = $row["user_status"];
+                      // $_SESSION["user_status"] = $row["user_status"];
 
-                      $responseuser = $row["user_id"];
-
-                      if($_SESSION["user_status"]=="1"){ //ถ้าเป็น admin ให้กระโดดไปหน้า admin_page.php
+                      // $responseuser = $row["user_id"];
+                      array_push($responseuser,$row);
+                      if($row["user_status"]=="1"){ //ถ้าเป็น admin ให้กระโดดไปหน้า admin_page.php
  
                         $result = "Login Success Student";
                         
                       }
  
-                      if ($_SESSION["user_status"]=="2"){  //ถ้าเป็น member ให้กระโดดไปหน้า user_page.php
+                      if ($row["user_status"]=="2"){  //ถ้าเป็น member ให้กระโดดไปหน้า user_page.php
  
                         $result = "Login Success Teacher";
  
                       }
 
-                      if ($_SESSION["user_status"]=="0"){  //ถ้าเป็น member ให้กระโดดไปหน้า user_page.php
+                      if ($row["user_status"]=="0"){  //ถ้าเป็น member ให้กระโดดไปหน้า user_page.php
  
                         $result = "Login Success Admin";
  
                       }
 
-                      if ($_SESSION["user_status"]=="3"){  //ถ้าเป็น member ให้กระโดดไปหน้า user_page.php
+                      if ($row["user_status"]=="3"){  //ถ้าเป็น member ให้กระโดดไปหน้า user_page.php
  
                         $result = "Login Success Personel";
  
                       }
 
-                      if ($_SESSION["user_status"]=="4"){  //ถ้าเป็น member ให้กระโดดไปหน้า user_page.php
+                      if ($row["user_status"]=="4"){  //ถ้าเป็น member ให้กระโดดไปหน้า user_page.php
  
                         $result = "Login Success General Public";
  

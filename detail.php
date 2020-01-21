@@ -13,17 +13,17 @@
 <?php require_once 'process.php';?>
 <h1>Member</h1>
 
-    <?php $con = mysqli_connect("localhost","root",""); 
-    mysqli_select_db($con,"sut_join");
+    <?php   
+    include("include/ConnectDB.php");
     $id = $_GET['detail'];
-    $sql_statement = "SELECT * FROM user  WHERE id = '$id'";
+    $sql_statement = "SELECT * FROM user  WHERE user_id = '$id'";
     $result = mysqli_query($con,$sql_statement); 
     $row = mysqli_fetch_array($result) 
     ?>   
         <table class="table table-striped">
             <tr>
             <th>ID</th>
-            <td><?php echo$row['id'];?></td>
+            <td><?php echo$row['user_id'];?></td>
             </tr>
             <tr>
             <th>Name</th>
@@ -44,7 +44,7 @@
             <tr>
             <th>Status</th>
             <td><?php 
-            if($row['status']==0)
+            if($row['user_status']==0)
             {
                 echo "Admin";
             }else
@@ -55,7 +55,7 @@
             <tr>
             <th>Gender</th>
             <td><?php 
-            if($row['gender']==0)
+            if($row['user_gender']==0)
             {
                 echo "Male";
             }else
@@ -81,7 +81,7 @@
             </tr>
         </table>
         <form action="process.php" method="POST" role="form" class="form-inline">
-                        <a href="process.php?delete=<?php echo $row['id']; ?>" 
+                        <a href="process.php?delete=<?php echo $row['user_id']; ?>" 
                         class="btn btn-danger" >Delete</a></td>
             <button type = "submit" class="btn btn-info" name ="cancle">Cancle</button>
     

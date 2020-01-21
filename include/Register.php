@@ -15,9 +15,11 @@
     $phone = $obj['phone'];
     $gender = $obj['gender'];
     $status = $obj['status'];
-    $age = $obj['age'];
+    $birthday = $obj['birthday'];
+    $profile = $obj['profile'];
+    $student_id = $obj['student_id'];
 
-    $sql = "Insert into user(name,surname,username,password,email,phone,user_gender,user_status,age) values ('".$name."','".$surname."','".$username."','".$password."','".$email."','".$phone."','".$gender."','".$status."','".$age."')";   
+    $sql = "Insert into user(name,surname,username,password,email,phone,user_gender,user_status,birthday,profile,student_id) values ('".$name."','".$surname."','".$username."','".$password."','".$email."','".$phone."','".$gender."','".$status."','".$birthday."','".$profile."','".$student_id."')";   
     if ($con->query($sql) === TRUE) {
         $result = "Register Success Let's Join";
     } else {
