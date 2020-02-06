@@ -15,10 +15,10 @@
     //  array_push($result,'"search":"1"');
     if($filter == 2){
         if($text == 0){
-            $sql = "select * from activity,user WHERE  (activity.id_host = user.user_id and activity.status != 1) and DATE_FORMAT(date_start, '%Y-%m-%d %H:%i:%s') > DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i:%s') ORDER BY date_start DESC limit {$start} , {$perpage}";
+            $sql = "select * from activity,user WHERE  (activity.id_host = user.user_id and activity.status != 1) and DATE_FORMAT(date_start, '%Y-%m-%d %H:%i:%s') > DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i:%s') ORDER BY date_update DESC limit {$start} , {$perpage}";
         }
         else {
-            $sql = "select * from activity,user WHERE  (activity.id_host = user.user_id and activity.status != 1) and (activity.type like '%$text%') and DATE_FORMAT(date_start, '%Y-%m-%d %H:%i:%s') > DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i:%s') ORDER BY date_start DESC limit {$start} , {$perpage}";
+            $sql = "select * from activity,user WHERE  (activity.id_host = user.user_id and activity.status != 1) and (activity.type like '%$text%') and DATE_FORMAT(date_start, '%Y-%m-%d %H:%i:%s') > DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i:%s') ORDER BY date_update DESC limit {$start} , {$perpage}";
         }
     }
     $query = mysqli_query($con,$sql);    

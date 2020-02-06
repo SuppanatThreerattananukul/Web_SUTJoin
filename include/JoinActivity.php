@@ -14,8 +14,9 @@
     if($status == "add"){
         $inviter = $obj['inviter'] + 1;
         $sql = "Insert into join_activity(id_user,id_activity,status_signin) values ('".$id_user[1]."','".$id."',0)";
-        $sql1 = "Update activity Set inviter = '".$inviter."' where id = ".$id ;  
-        if (($con->query($sql) === TRUE) && ($con->query($sql1) === TRUE)) {
+        $sql1 = "Update activity Set inviter = '".$inviter."',date_update = now() where id = ".$id ;  
+        $sql2 = "insert into notification(id_user,id_activity,status,readed,dateTime) values('".$id_user[1]."','".$id."',1,0,now())";
+        if (($con->query($sql) === TRUE) && ($con->query($sql1) === TRUE) && ($con->query($sql2) === TRUE)) {
             $result = "Add record successfully";
         } else {
             $result = "Error: "  .$con->error;
@@ -24,8 +25,9 @@
     else if ($status == "cancel"){
         $inviter = $obj['inviter'] - 1;
         $sql = "delete from join_activity WHERE id_user = $id_user[1] and id_activity =  $id ";
-        $sql1 = "Update activity Set inviter = '".$inviter."' where id = ".$id ;  
-        if (($con->query($sql) === TRUE) && ($con->query($sql1) === TRUE)) {
+        $sql1 = "Update activity Set inviter = '".$inviter."' where id = ".$id ; 
+        $sql2 = "insert into notification(id_user,id_activity,status,readed,dateTime) values('".$id_user[1]."','".$id."',2,0,now())";
+        if (($con->query($sql) === TRUE) && ($con->query($sql1) === TRUE) && ($con->query($sql2) === TRUE)) {
             $result = "Delete record successfully";
         } else {
             $result = "Error: "  .$con->error;

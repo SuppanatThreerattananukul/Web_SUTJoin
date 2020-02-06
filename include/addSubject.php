@@ -6,8 +6,6 @@
     // decoding the received JSON and store into $obj variable.
     $obj = json_decode($json,true);
 
-    $grade = $obj['grade'];
-    $term = $obj['term'];
     $subject_id = $obj['subject_id'];
 
     $subject_name = '';
@@ -35,15 +33,11 @@
             id_user,
             id_subject,
             name_subject,
-            grade,
-            term,
             credit
             )VALUES(
             '".$id."',
             '".$subject_id."',
             '".$subject_name."',
-            '".$grade."',
-            '".$term."',
             '".$credit."'
             )";
 

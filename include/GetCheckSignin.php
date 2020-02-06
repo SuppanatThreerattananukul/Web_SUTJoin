@@ -6,14 +6,21 @@
      // decoding the received JSON and store into $obj variable.
      $obj = json_decode($json,true);
  
-     // $id_host = $obj[''];
+
     //  $id_user = (explode('"',$obj['id_user']));
-     $id = $obj['id_user'];
-     $page = $obj['page'];
-     $perpage = 10;
+    //  $id = $id_user[1];
+    $user_id = $obj['user_id'];
+    $status = $obj['status'];
+
+
      $result = array();
-     $start = ($page - 1) * $perpage;
-    $sql = "select * FROM activity,user WHERE id_host =  $id and user_id =$id ORDER BY date_host DESC limit {$start} , {$perpage}";
+     if($status == 1){
+        $sql = "SELECT id_subject,name_subject FROM subject WHERE id_subject in (SELECT DISTINCT subject_id FROM check_name WHERE id_student = $user_id)";
+     }
+     else if($status == 2){
+        $id_student = $obj['id_student'];
+        $sql = "SELECT * FROM check_name WHERE id_student = $user_id and subject_id = '$id_student'";
+     }
     $query = mysqli_query($con,$sql);    
     while($row = mysqli_fetch_array($query,MYSQLI_ASSOC))
     {

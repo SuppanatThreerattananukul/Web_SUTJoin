@@ -5,17 +5,18 @@
     
     // decoding the received JSON and store into $obj variable.
     $obj = json_decode($json,true);
+
+    // $id_host = $obj[''];
+    $text = $obj['text'];
+    $page = $obj['page'];
     $status = $obj['status'];
+    $perpage = 20;
     $result = array();
-    if($status == 1){
-        $sql = "SELECT * FROM tag ORDER BY amount desc LIMIT 5";
-    } else if($status == 2) {
-        $sql = "SELECT * FROM tag ORDER BY amount desc";
-    }else{
-        $page = $obj['page'];
-        $perpage = 20;
-        $start = ($page - 1) * $perpage;
-        $sql = "SELECT * FROM tag ORDER BY amount desc limit {$start} , {$perpage}";
+    $start = ($page - 1) * $perpage;
+    if($status==1){
+        $sql = "select * from user WHERE  (name like '%$text%' or surname like '%$text%' or username like '%$text%')  limit {$start} , {$perpage}";
+    }else if($status==2){
+        $sql = "select * from user WHERE  user_id = $text";
     }
     $query = mysqli_query($con,$sql);    
     while($row = mysqli_fetch_array($query,MYSQLI_ASSOC))

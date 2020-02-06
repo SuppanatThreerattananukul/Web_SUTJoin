@@ -22,9 +22,12 @@
     $address = $obj['address'];
     $volunteer = $obj['volunteer'];
     $random = rand(1000,9999);
-    $sql = "Insert into activity(id_host,date_start,title,description,number_people,min_age,max_age,location_name,type,gender,photo,location_lat,location_long,location_address,tag,date_host,date_update,ramdom_code,volunteer_hour) values ('".$id_host[1]."','".$date_start."','".$title."','".$description."','".$number_people."','".$min_age."','".$max_age."','".$location_name."','".$type."','".$gender."','".$image."','".$latitude."','".$longitude."','".$address."','".$tag."',CURDATE(),CURDATE(),'".$random."','".$volunteer."')";   
+    $sql = "Insert into activity(id_host,date_start,title,description,number_people,min_age,max_age,location_name,type,gender,photo,location_lat,location_long,location_address,tag,date_host,date_update,ramdom_code,volunteer_hour) values ('".$id_host[1]."','".$date_start."','".$title."','".$description."','".$number_people."','".$min_age."','".$max_age."','".$location_name."','".$type."','".$gender."','".$image."','".$latitude."','".$longitude."','".$address."','".$tag."',now(),now(),'".$random."','".$volunteer."')";   
     if ($con->query($sql) === TRUE) {
         $result = "Your activity create successfully";
+        $lastId = $con->insert_id;
+        $sql = "insert into notification(id_user,id_activity,status,readed,dateTime) values('".$id_host[1]."','".$lastId."',3,0,now())";
+        $con->query($sql);
     } else {
         $result = "Error";
     }
@@ -37,7 +40,7 @@
     }
         $sql1 = "update tag set amount = '".$amount."' where activity_tag ='".$tag."'";
     }else{
-        $sql1 = "insert into tag(activity_tag,amount) values ('".$tag."',0)";
+        $sql1 = "insert into tag(activity_tag,amount) values ('".$tag."',1)";
     }
     if ($con->query($sql1) === TRUE) {
         $result = "Your activity create successfully";
